@@ -227,6 +227,8 @@ class Controller extends Payloadable {
     super._onPayload(payload)
     this.onRoute(payload)
   }
+
+  onRoute() {}
 }
 
 /**
