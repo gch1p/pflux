@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-import MicroEvent from 'microevent-emit'
+import Emitter from 'pemit'
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -38,7 +38,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
   }
 }
 
-class Payloadable {
+class Payloadable extends Emitter {
   _verbose = false
 
   defaults() {}
@@ -261,8 +261,6 @@ class Store extends Payloadable {
     return true
   }
 }
-MicroEvent.mixin(Controller)
-MicroEvent.mixin(Store)
 
 export {
   Controller,
