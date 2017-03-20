@@ -1,14 +1,14 @@
 {
   "name": "pflux",
-  "version": "1.0.4",
-  "description": "",
+  "version": "1.0.5",
+  "description": "``` npm install --save pflux ```",
   "main": "flux.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evgenyzinoviev/pflux.git"
+    "url": "git+https://github.com/gch1p/pflux.git"
   },
   "keywords": [
     "flux"
@@ -16,9 +16,9 @@
   "author": "Evgeny Zinoviev (me@ch1p.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/evgenyzinoviev/pflux/issues"
+    "url": "https://github.com/gch1p/pflux/issues"
   },
-  "homepage": "https://github.com/evgenyzinoviev/pflux#readme",
+  "homepage": "https://github.com/gch1p/pflux#readme",
   "dependencies": {
     "pemit": "^1.1.0"
   }
