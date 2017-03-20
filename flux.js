@@ -1,6 +1,6 @@
 /**
  * Copyright 2013-2015, Facebook, Inc.
- * Copyright 2015-2016, Evgeny Zinoviev
+ * Copyright 2015-2017, Evgeny Zinoviev
  * All rights reserved.
  */
 
@@ -40,8 +40,6 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 class Payloadable extends Emitter {
   _verbose = false
-
-  defaults() {}
 
   _onPayload(payload) {
     if (this._verbose) {
@@ -175,43 +173,43 @@ const dispatch = dispatcher.dispatch.bind(dispatcher)
 /**
  * Router
  */
-const history = window.history
-const location = window.location
-
-class Router extends BaseDispatcher {
-  constructor() {
-    super()
-    window.addEventListener('popstate', this.update)
-  }
-
-  update = () => {
-    let route = this.getCurrentUrl()
-    this.dispatch(route)
-  }
-
-  /**
-   * @param {String} url
-   */
-  go(url) {
-    history.pushState({}, '', url)
-    this.update()
-  }
-  
-  /**
-   * @return {String}
-   */
-  getCurrentUrl() {
-    let l = document.createElement("a")
-    l.href = location.href
-    return {
-      path: l.pathname,
-      host: l.host,
-      hash: l.hash,
-      query: l.search
-    }
-  }
-}
-const router = new Router()
+//const history = window.history
+//const location = window.location
+//
+//class Router extends BaseDispatcher {
+//  constructor() {
+//    super()
+//    window.addEventListener('popstate', this.update)
+//  }
+//
+//  update = () => {
+//    let route = this.getCurrentUrl()
+//    this.dispatch(route)
+//  }
+//
+//  /**
+//   * @param {String} url
+//   */
+//  go(url) {
+//    history.pushState({}, '', url)
+//    this.update()
+//  }
+//
+//  /**
+//   * @return {String}
+//   */
+//  getCurrentUrl() {
+//    let l = document.createElement("a")
+//    l.href = location.href
+//    return {
+//      path: l.pathname,
+//      host: l.host,
+//      hash: l.hash,
+//      query: l.search
+//    }
+//  }
+//}
+//const router = new Router()
 
 /**
  * Base Controller class
@@ -220,7 +218,6 @@ class Controller extends Payloadable {
   constructor() {
     super()
     this.dispatchToken = router.register(this)
-    this.defaults()
   }
 
   _onPayload(payload) {
@@ -237,24 +234,23 @@ class Controller extends Payloadable {
 class Store extends Payloadable {
   constructor() {
     super()
-    this.callbacks = {}
-    this.dispatchToken = dispatcher.register(this)
-    this.defaults()
+    this._callbacks = {}
+    this._dispatchToken = dispatcher.register(this)
   }
 
   onPayload(name, callback) {
-    if (this.callbacks[name] === undefined) {
-      this.callbacks[name] = []
+    if (this._callbacks[name] === undefined) {
+      this._callbacks[name] = []
     }
-    this.callbacks[name].push(callback)
+    this._callbacks[name].push(callback)
     return this
   }
 
   _onPayload(payload) {
     super._onPayload(payload)
     let { name, data } = payload
-    if (this.callbacks[name] !== undefined) {
-      for (let callback of this.callbacks[name]) {
+    if (this._callbacks[name] !== undefined) {
+      for (let callback of this._callbacks[name]) {
         callback(data)
       }
     }
@@ -269,5 +265,5 @@ export {
   dispatcher,
   dispatch,
 
-  router
+  //router
 }
