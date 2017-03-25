@@ -217,15 +217,15 @@ const dispatch = dispatcher.dispatch.bind(dispatcher)
 class Controller extends Payloadable {
   constructor() {
     super()
-    this.dispatchToken = router.register(this)
+    //this.dispatchToken = router.register(this)
   }
 
-  _onPayload(payload) {
-    super._onPayload(payload)
-    this.onRoute(payload)
-  }
+//  _onPayload(payload) {
+//    super._onPayload(payload)
+//    this.onRoute(payload)
+//  }
 
-  onRoute() {}
+//  onRoute() {}
 }
 
 /**
